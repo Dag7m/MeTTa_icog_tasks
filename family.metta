@@ -190,8 +190,10 @@
 (= (get-nth-predecessors $x $n)
    (match &self
      (, (> $n 1)
-        (Parent $p $x))
-     (get-nth-predecessors $p (- $n 1))))
+        (get-nth-predecessors
+          (get-parents $x)
+          (- $n 1)))
+     $r))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; TESTS WITH EXPECTED OUTPUTS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -231,6 +233,7 @@
 ; GRANDPARENTS
 ; ======================
 
+!(Eyobs grandpas)
 ! (get-grandparents Eyob)
 ; => [Tesfaye, Almaz]
 
@@ -244,7 +247,7 @@
 ; ======================
 ; UNCLES & AUNTS
 ; ======================
-
+!(uncles)
 ! (get-uncles Dawit)
 ; => [Getachew]   ; Samson's brother
 
